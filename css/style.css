@@ -1,0 +1,641 @@
+/* RESET BÁSICO */
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* HERO */
+.hero {
+  width: 100%;
+  height: 420px;
+
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      rgba(15, 42, 46, 0.8),
+      rgba(15, 42, 46, 0.8)
+    ),
+    url("../img/banner-vistoria-horizontal.svg");
+
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+
+  color: #ffffff;
+}
+
+
+.hero-banner {
+  width: 100%;
+  max-width: 1100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* LOGO */
+.hero-logo {
+  width: 160px;
+  max-width: 1200px;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+/* TÍTULO */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* SUBTÍTULO */
+.hero-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 60vh;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-logo {
+    width: 110px;
+  }
+}
+@media (max-width: 280px) {
+  .hero {
+    min-height: 50vh;
+    padding: 20px;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-logo {
+    width: 100px;
+  }
+}
+
+/* ==============================
+   AJUSTE DE ENQUADRAMENTO DO BANNER
+============================== */
+
+.carousel-inner {
+  height: 280px;          /* ajuste fino se quiser */
+  overflow: hidden;       /* impede imagem de vazar */
+  border-radius: 12px;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* 🔥 ESSENCIAL */
+  object-position: center;
+  display: block;
+}
+
+
+/* ======================================
+   AJUSTE ENTRE CARROSSEL E FORMULÁRIO
+====================================== */
+
+#carouselPubli {
+  margin-bottom: 1.5rem;
+}
+
+#quadro-vistoria {
+  padding-top: 0;
+  margin-top: -40px; /* aproxima visualmente */
+}
+
+/* ======================================
+   EFEITO DE TRANSIÇÃO VISUAL
+====================================== */
+
+.upload-card {
+  position: relative;
+  z-index: 2;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  background: #fff;
+}
+.upload-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #f5c16c, #e6ae52);
+  border-radius: 18px;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.upload-card:hover::before {
+  opacity: 1;
+}
+
+/* AJUSTE MOBILE */
+@media (max-width: 768px) {
+  .carousel-img {
+    height: 220px;
+    object-fit: contain; /* evita cortes no mobile */
+    background-color: #0f2a2e;  /* fundo neutro */
+  }  
+} 
+@media (max-width: 480px) {
+  .carousel-img {
+    height: 180px;
+  }
+}
+
+/* NAVBAR GLASS PREMIUM */
+.custom-navbar {
+  background: rgba(15, 42, 46, 0.55);   /* transparência */
+  backdrop-filter: blur(12px);          /* desfoque */
+  -webkit-backdrop-filter: blur(12px);  /* Safari */
+  top: 0;
+  margin-top: 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+
+  transition: all 0.1Ss ease;
+}
+
+.custom-navbar::before,
+.custom-navbar::after {
+  display: none !important;
+}
+
+
+/* LOGO SVG NA NAVBAR */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.navbar-brand img {
+  max-height: 30px;   /* 🔑 CONTROLE REAL */
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+/* NAVBAR ESCONDIDA */
+.custom-navbar.hide {
+  transform: translateY(-100%);
+}
+
+/* garante animação suave */
+.custom-navbar {
+  transition: transform 0.3s ease, padding 0.3s ease, background 0.3s ease;
+}
+
+/* LINKS */
+.navbar .nav-link {
+  color: #ffffff;
+  font-weight: 500;
+  margin-left: 16px;
+}
+
+.navbar .nav-link:hover {
+  color: #f5deb3;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  height: 40px;        /* controla pelo height */
+  width: 40px;
+  object-fit: cover;      /* 🔑 força zoom interno */
+  object-position: center;
+}
+
+.navbar-brand:hover {
+  color: #ffffff;
+}
+
+/* barra */
+.custom-navbar {
+  padding: -6px 20px;
+}
+
+/* logo */
+.navbar-brand img {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+}
+
+
+
+/* RODAPÉ */
+footer {
+  background-color: #0f2a2e;
+  color: #ffffff;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.9rem;
+}   
+footer a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+footer a:hover {
+  color: #cccccc;
+}
+footer p {
+  margin: 5px 0;
+}
+footer .social-icons a {
+  margin: 0 10px;
+  font-size: 1.2rem;
+}
+footer .social-icons a:hover {
+  color: #cccccc;
+}
+/* SEÇÕES */
+
+/* ===== FORMULÁRIO VISTORIA ===== */
+
+.upload-card,
+.result-card {
+  border-radius: 14px;
+}
+
+/* Título centralizado mais forte */
+.upload-card .card-title {
+  font-weight: 600;
+}
+
+/* Inputs mais confortáveis */
+.form-control,
+.form-select {
+  padding: 12px;
+  border-radius: 10px;
+}
+
+/* Botão principal */
+.upload-card .btn-warning {
+  background-color: #f5c16c;
+  border: none;
+}
+
+.upload-card .btn-warning:hover {
+  background-color: #e6ae52;
+}
+
+/* Textarea mais elegante */
+.result-card textarea {
+  resize: none;
+}
+
+/* Espaço entre cards */
+.result-card {
+  margin-top: 24px;
+}
+/* Espaçamento das seções */
+
+section.py-5 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+/* Preview de imagens */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.preview-item {
+  position: relative;
+}
+
+.preview-grid img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão remover */
+.preview-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.preview-remove:hover {
+  background: #dc3545;
+}
+
+.custom-file-bar {
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  background: #fff;
+  color: #6c757d;
+  transition: border-color 0.2s ease;
+}
+
+.custom-file-bar:hover {
+  border-color: #f5c16c;
+}
+
+.custom-file-bar.active {
+  color: #000;
+  border-color: #f5c16c;
+  font-weight: 500;
+}
+
+/* Card padrão (Como funciona + Vantagens) */
+.feature-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  height: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Bolinha amarela */
+.feature-icon {
+  width: 36px;
+  height: 36px;
+  background: #f5c16c; /* amarelo premium */
+  border-radius: 50%;
+  margin: 0 auto 16px auto;
+}
+
+
+/* Título do card */
+.feature-card h5 {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Texto */
+.feature-card p {
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+/* CTA - NOVA VISTORIA */
+.cta-section {
+  background: linear-gradient(
+    135deg,
+    #0f2a2e,
+    #173f44
+  );
+  color: #ffffff;
+}
+
+.cta-section p {
+  color: #e0e0e0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-section .btn-warning {
+  background-color: #f5c16c;
+  border: none;
+}
+
+.cta-section .btn-warning:hover {
+  background-color: #e6ae52;
+}
+/* SEÇÃO SOBRE */
+
+#quadro-vistoria {
+  scroll-margin-top: 100px;
+}
+
+section.bg-light {
+  background-color: #f8f9fa !important;
+}
+section.text-center {
+  text-align: center !important;
+}
+section .fw-bold {
+  font-weight: 700 !important;
+}
+section .mb-3 {
+  margin-bottom: 1rem !important;
+}
+section .text-muted {
+  color: #6c757d !important;
+}
+section .mb-0 {
+  margin-bottom: 0 !important;
+}
+section .container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+}           
+section .container.text-center {
+  text-align: center !important;
+}
+section .container.text-center h2 {
+  font-size: 2rem;
+}
+section .container.text-center p {
+  font-size: 1.1rem;
+}
+section .container.text-center p {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ===== UPLOAD VISUAL ===== */
+.upload-zone {
+  border: 2px dashed #f0b44c;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  background: #fffaf0;
+  transition: 0.3s;
+}
+
+.upload-zone:hover {
+  background: #fff3d6;
+  border-color: #e0a93d;
+}
+
+.upload-zone i {
+  font-size: 32px;
+  color: #e0a93d;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ===== PREVIEW ===== */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.preview-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.preview-item img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+}
+
+.preview-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+.preview-remove:hover {
+  background: #dc3545;
+}
+
+/* =====================
+   LOGIN FULLSCREEN
+===================== */
+
+.login-section {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.login-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+.login-card h3 {
+  margin-bottom: 24px;
+  font-weight: 600;
+  text-align: center;
+}  
+
+/* ======================================
+   CORREÇÃO DO ESPAÇO ENTRE CARROSSEL
+   E QUADRO DE VISTORIA
+====================================== */
+
+/* remove o padding forçado da section.py-5 APENAS aqui */
+#quadro-vistoria {
+  padding-top: 0 !important;
+  margin-top: -80px; /* aproxima do carrossel */
+  position: relative;
+  z-index: 2;
+}
+
+/* garante que o carrossel não empurre espaço extra */
+#carouselPubli {
+  margin-bottom: 0 !important;
+}
+
+/* aproxima visualmente o card do formulário */
+.upload-card {
+  margin-top: -40px;
+}
+
+/* transição visual suave entre carrossel e formulário */
+#quadro-vistoria {
+  background: linear-gradient(
+    to bottom,
+    rgba(248, 249, 250, 0) 0%,
+    #f8f9fa 65%
+  );
+}
+
+/* FIM DAS SEÇÕES */
+
+/* FIM DO CSS */

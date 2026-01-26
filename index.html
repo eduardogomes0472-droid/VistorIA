@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>VistorIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS (CDN) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <!-- Seu CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    body {
+      .logo-banner {
+  width: 100%;
+  background: #f8f9fa; /* pode mudar */
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-banner img {
+  max-width: 900px; /* controla o “respiro” */
+  width: 100vw;
+  height: auto;
+}
+
+ background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 720px;
+    }
+  </style>
+  <!-- Bootstrap Icons -->
+  <link 
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  >
+   <!-- ETAPA 1: jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+  <div class="container">
+    
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img 
+        src="img/logo1.svg"
+        alt="VistorIA"
+        class="navbar-logo"
+      >
+    </a>
+ 
+    <!-- navbar -->
+    <span
+  id="navPlano"
+  class="badge ms-3 d-none"
+>
+  Plano: <span id="planoNome"></span>
+</span> 
+
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarContent"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#como-funciona">Como funciona</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#vantagens">Vantagens</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#nova-vistoria">Nova vistoria</a>
+        </li>
+        <li class="nav-item dropdown" id="navUsuario">
+  <a
+    class="nav-link dropdown-toggle"
+    href="#"
+    role="button"
+    data-bs-toggle="dropdown"
+  >
+    Conta
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li>
+      <a class="dropdown-item" href="#aba-login" id="navLogin">
+        Entrar
+      </a>
+    </li>
+
+    <li>
+      <a class="dropdown-item d-none" href="#historico" id="navHistorico">
+        Histórico
+      </a>
+    </li>
+
+    <li>
+      <a class="dropdown-item d-none" href="#empresa" id="navEmpresa">
+        Empresa
+      </a>
+    </li>
+
+    <li><hr class="dropdown-divider"></li>
+  <li>
+      <a class="dropdown-item text-danger d-none" href="#" id="navLogout">
+        Sair
+      </a>
+    </li>
+  </ul>
+</li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+ <section class="hero">
+  <div class="container text-center hero-content">
+  </div>
+</section>
+
+
+ <!-- Carousel de banners -->
+
+<div id="carouselPubli" class="carousel slide carousel-fade my-3" data-bs-ride="carousel">
+  <div class="carousel-inner rounded shadow">
+
+    <div class="carousel-item active">
+      <img src="img/banner-1.png"
+        class="carousel-img"
+        alt="Mais produtividade"
+      >
+    </div>
+
+    <div class="carousel-item">
+      <img src="img/banner-2.png"
+        class="carousel-img"
+        alt="Padronização"
+      >
+    </div>
+
+    <div class="carousel-item">
+      <img src="img/banner-3.png"
+        class="carousel-img"
+        alt="Humano no controle"
+      >
+    </div>
+
+  </div>
+</div>
+
+<div id="carouselTextos" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item">
+      <div class="p-5 bg-light text-dark text-center">
+        <h4 class="fw-bold">Humano no controle</h4>
+        <p class="mb-0">
+          A IA apoia. A decisão final é sempre do profissional.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- Card Upload -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3"></h5>
+
+  <!-- ===================== -->
+<!-- QUADRO DA VISTORIA -->
+<!-- ===================== -->
+<section id="quadro-vistoria" class="py">
+  <div class="container">
+
+    <!-- Card Upload -->
+    <div class="card shadow-sm mb-4 upload-card">
+  <div class="card-body">
+
+    <h5 class="card-title mb-4 text-center">Nova vistoria</h5>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Ambiente</label>
+      <select class="form-select">
+        <option selected disabled>Selecione o ambiente</option>
+        <option>Sala de estar</option>
+        <option>Cozinha</option>
+        <option>Banheiro</option>
+        <option>Quarto</option>
+        <option>Área externa</option>
+      </select>
+    </div>
+
+   <div class="mb-4">
+  <label class="form-label fw-semibold">Fotos do ambiente</label>
+
+  <!-- INPUT REAL (ESCONDIDO) -->
+  <input
+    type="file"
+    id="fotoInput"
+    multiple
+    accept="image/*"
+    hidden
+  >
+
+  <!-- BARRA VISUAL -->
+  <div
+    class="custom-file-bar"
+    id="fileBar"
+  >
+    Nenhuma foto selecionada
+  </div>
+
+  <small class="text-muted">
+    Você pode enviar várias fotos do mesmo ambiente.
+  </small>
+
+</div>
+
+<div id="previewFotos" class="preview-grid"></div>
+    <div class="d-grid mt-4">
+    <button
+  id="btnEnviar"
+  class="btn btn-warning w-100 fw-bold btn-lg"
+>
+  Enviar para análise
+</button>
+
+  </div>
+</div>
+
+<!-- Card Resultado -->
+   <div class="card shadow-sm result-card">
+  <div class="card-body">
+
+    <h5 class="card-title mb-3">Descrição gerada</h5>
+
+    <textarea
+  id="descricaoResultado"
+  class="form-control"
+  rows="6"
+  placeholder="A descrição do ambiente aparecerá aqui..."
+></textarea>
+
+    <div class="d-grid mt-4">
+      <button class="btn btn-primary fw-bold btn-lg">
+        Copiar descrição
+      </button>
+
+      <div class="mt-3">
+        <label class="form-label fw-semibold">Modelo de relatório</label>
+        <select
+          id="modeloRelatorio"
+          class="form-select"
+        >
+          <option value="simples">Modelo simples (Free)</option>
+    <option value="tecnico">Modelo técnico (Pro)</option>
+    <option value="empresa">Modelo da empresa (Premium)</option>
+  </select>
+</div>
+
+      <button
+  id="btnPdf"
+  class="btn btn-outline-dark w-100 mt-3"
+>
+  Exportar relatório (PDF)
+</button>
+
+<button
+  id="btnPdfPro"
+  class="btn btn-dark w-100 mt-2"
+>
+  Exportar relatório com fotos (Pro)
+</button>
+
+
+
+    </div>
+  </div>
+</div>
+
+</section>  
+
+ <!-- BOOTSTRAP JS (OBRIGATÓRIO PRO CARROSSEL) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</section>
+
+<!-- SEU SCRIPT DA NAVBAR -->
+<script>
+  const navbar = document.querySelector('.custom-navbar');
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+
+    // ENCOLHE
+    if (currentScroll > 80) {
+      navbar.classList.add('shrink');
+    } else {
+      navbar.classList.remove('shrink');
+    }
+
+    // ESCONDE / MOSTRA
+    if (currentScroll > lastScrollY && currentScroll > 120) {
+      navbar.classList.add('hide');
+    } else {
+      navbar.classList.remove('hide');
+    }
+
+    lastScrollY = currentScroll;
+  });
+
+</script>
+
+<!-- 🔴 NAV TERMINOU AQUI -->
+
+<!-- ===================== -->
+<!-- COMO FUNCIONA -->
+<!-- ===================== -->
+<section id="como-funciona" class="py-5">
+  <div class="container">
+
+    <h2 class="text-center mb-5">Como funciona</h2>
+
+    <div class="row g-4">
+
+      <!-- Etapa 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm border-0">
+          <div class="card-body">
+            <div class="step-circle mb-3"></div>
+            <i class="bi bi-upload fs-1 text-primary"></i>
+            <h5 class="mt-3">Envie as fotos</h5>
+            <p class="text-muted">
+              Faça o upload das imagens do ambiente que deseja vistoriar.
+            </p>
+            <div class="feature-icon"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Etapa 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm border-0">
+          <div class="card-body">
+            <div class="step-circle mb-3"></div>
+            <i class="bi bi-cpu fs-1 text-primary"></i>
+            <h5 class="mt-3">Análise inteligente</h5>
+            <p class="text-muted">
+              A IA analisa as imagens e identifica características técnicas.
+            </p>
+            <div class="feature-icon"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Etapa 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm border-0">
+          <div class="card-body">
+            <div class="step-circle mb-3"></div>
+            <i class="bi bi-file-text fs-1 text-primary"></i>
+            <h5 class="mt-3">Descrição gerada</h5>
+            <p class="text-muted">
+              Receba a descrição pronta para revisão e uso no relatório.
+            </p>
+            <div class="feature-icon"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===================== -->
+<!-- VANTAGENS -->
+<!-- ===================== -->
+<section id="vantagens" class="py-5 bg-light">
+  <div class="container">
+
+    <h2 class="text-center mb-5">Vantagens</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm border-0">
+          <div class="card-body">
+            <i class="bi bi-speedometer2 fs-1 text-primary"></i>
+            <h5 class="mt-3">Mais produtividade</h5>
+            <p class="text-muted">
+              Reduza o tempo de elaboração dos relatórios e faça mais vistorias.
+            </p>
+            <div class="feature-icon"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm border-0">
+          <div class="card-body">
+            <i class="bi bi-file-earmark-check fs-1 text-primary"></i>
+            <h5 class="mt-3">Padronização</h5>
+            <p class="text-muted">
+              Relatórios claros, consistentes e organizados em todos os imóveis.
+            </p>
+            <div class="feature-icon"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm border-0">
+          <div class="card-body">
+            <i class="bi bi-person-check fs-1 text-primary"></i>
+            <h5 class="mt-3">Humano no controle</h5>
+            <p class="text-muted">
+              A IA auxilia, mas a decisão final continua com o profissional.
+            </p>
+            <div class="feature-icon"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== -->
+<!-- PLANOS -->
+<!-- ===================== -->
+<section id="aba-planos" class="py-5 bg-light">
+  <div class="container">
+
+    <h2 class="text-center mb-5">Planos</h2>
+
+    <div class="row g-4">
+
+      <!-- FREE -->
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Free</h5>
+            <h3 class="my-3">R$ 0</h3>
+            <ul class="list-unstyled text-muted mb-4">
+              <li>✔ Descrição básica</li>
+              <li>✔ PDF simples</li>
+              <li>✖ Fotos no relatório</li>
+              <li>✖ Modelo técnico</li>
+            </ul>
+            <button class="btn btn-outline-secondary w-100" disabled>
+              Plano atual
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRO -->
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm border-warning">
+          <div class="card-body">
+            <h5 class="card-title">Pro</h5>
+            <h3 class="my-3">R$ 29/mês</h3>
+            <ul class="list-unstyled text-muted mb-4">
+              <li>✔ PDF com fotos</li>
+              <li>✔ Modelo técnico</li>
+              <li>✔ Histórico</li>
+              <li>✖ Modelo da empresa</li>
+            </ul>
+            <button
+              id="btnPlanoPro"
+              class="btn btn-warning w-100 fw-bold">
+              Assinar Pro
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow-sm border-dark">
+          <div class="card-body">
+            <h5 class="card-title">Premium</h5>
+            <h3 class="my-3">R$ 59/mês</h3>
+            <ul class="list-unstyled text-muted mb-4">
+              <li>✔ Modelo da empresa</li>
+              <li>✔ Logo e cores</li>
+              <li>✔ Tudo do Pro</li>
+            </ul>
+            <button
+              id="btnPlanoPremium"
+              class="btn btn-dark w-100 fw-bold">
+              Assinar Premium
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===================== -->
+<!-- ===================== -->
+<!-- NOVA VISTORIA (CTA) -->
+<!-- ===================== -->
+<section id="nova-vistoria" class="py-5 cta-section">
+  <div class="container text-center">
+
+    <h2 class="mb-3">Nova vistoria</h2>
+
+    <p class="mb-4">
+      Inicie uma nova vistoria enviando fotos do imóvel e deixe a IA
+      gerar a descrição técnica para você.
+    </p>
+
+    <a href="#quadro-vistoria" class="btn btn-warning btn-lg fw-bold px-5">
+  Iniciar nova vistoria
+</a>
+
+
+  </div>
+</section>
+
+<!-- ===================== -->
+<!-- ABA LOGIN -->
+<!-- ===================== -->
+<section id="aba-login" class="py-5 bg-light d-none">
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+
+            <h4 class="mb-3">Entrar no VistorIA</h4>
+
+            <p class="text-muted mb-4">
+              Faça login para continuar usando os recursos da plataforma.
+            </p>
+
+            <input
+              type="email"
+              id="loginEmail"
+              class="form-control mb-3"
+              placeholder="Digite seu e-mail"
+            >
+
+            <button
+              id="btnLogin"
+              class="btn btn-warning w-100 fw-bold"
+            >
+              Entrar
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================================================
+     ABA EMPRESA (PREMIUM)
+     👉 VISIBILIDADE CONTROLADA VIA JS
+===================================================== -->
+<section id="empresa" class="py-5 d-none">
+  <div class="container">
+    <div class="card shadow-sm">
+      <div class="card-body">
+
+        <h5 class="mb-4">Dados da empresa (Premium)</h5>
+
+        <input id="empresaNome" class="form-control mb-3" placeholder="Nome da empresa">
+        <input id="empresaLogo" type="file" class="form-control mb-3">
+        <input id="empresaCor" type="color" class="form-control form-control-color mb-3">
+
+        <button id="salvarEmpresa" class="btn btn-warning fw-bold">
+          Salvar dados da empresa
+        </button>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     HISTÓRICO DE VISTORIAS
+     👉 ACESSO IDEAL VIA NAVBAR
+===================================================== -->
+<section id="historico" class="py-5 bg-light d-none">
+  <div class="container">
+    <h3 class="text-center mb-4">Histórico de vistorias</h3>
+    <div id="listaHistorico" class="list-group"></div>
+  </div>
+</section>
+
+  <!-- CONTADOR DE VISTORIAS RESTANTES (FREE) -->
+<small class="text-muted">
+  Vistorias restantes no plano Free:
+  <span id="contadorVistorias"></span>
+</small>
+
+
+
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* =====================================================
+     CONFIGURAÇÃO GLOBAL
+  ===================================================== */
+  const LIMITE_FREE = 10;
+
+  let totalVistorias =
+    JSON.parse(localStorage.getItem('totalVistorias')) || 0;
+
+  let historicoVistorias =
+    JSON.parse(localStorage.getItem('historico')) || [];
+
+  const usuario =
+    JSON.parse(localStorage.getItem('usuario'));
+
+  const planoUsuario = usuario?.plano || 'free';
+
+
+  /* =====================================================
+     FUNÇÃO CENTRAL — LOGIN
+  ===================================================== */
+  function exigirLogin() {
+    const abaLogin = document.getElementById('aba-login');
+
+    if (abaLogin) {
+      abaLogin.classList.remove('d-none');
+      window.location.hash = 'aba-login';
+    } else {
+      alert('Faça login para continuar.');
+    }
+    return false;
+  }
+
+  function exigirUpgrade() {
+    alert('Este recurso está disponível apenas em planos pagos.');
+    const abaPlanos = document.getElementById('aba-planos');
+    abaPlanos?.scrollIntoView({ behavior: 'smooth' });
+    return false;
+  }
+
+
+  /* =====================================================
+     LOGIN (HANDLER)
+  ===================================================== */
+  const btnLogin = document.getElementById('btnLogin');
+  const loginEmail = document.getElementById('loginEmail');
+
+  if (btnLogin && loginEmail) {
+    btnLogin.addEventListener('click', () => {
+      if (!loginEmail.value) {
+        alert('Digite um e-mail válido');
+        return;
+      }
+
+      localStorage.setItem('usuario', JSON.stringify({
+        email: loginEmail.value,
+        plano: 'free',
+        limite: LIMITE_FREE,
+        usadas: 0
+      }));
+
+      alert('Login realizado com sucesso!');
+      location.reload();
+    });
+  }
+
+
+  /* =====================================================
+     NAVBAR DINÂMICA
+  ===================================================== */
+  const navLogin = document.getElementById('navLogin');
+  const navHistorico = document.getElementById('navHistorico');
+  const navEmpresa = document.getElementById('navEmpresa');
+  const navLogout = document.getElementById('navLogout');
+
+  const secaoEmpresa = document.getElementById('empresa');
+  const secaoHistorico = document.getElementById('historico');
+
+  if (!usuario) {
+    navLogin?.classList.remove('d-none');
+    navHistorico?.classList.add('d-none');
+    navEmpresa?.classList.add('d-none');
+    navLogout?.classList.add('d-none');
+
+    secaoEmpresa?.classList.add('d-none');
+    secaoHistorico?.classList.add('d-none');
+  } else {
+    navLogin?.classList.add('d-none');
+    navHistorico?.classList.remove('d-none');
+    navLogout?.classList.remove('d-none');
+
+    if (planoUsuario === 'premium') {
+      navEmpresa?.classList.remove('d-none');
+      secaoEmpresa?.classList.remove('d-none');
+    } else {
+      navEmpresa?.classList.add('d-none');
+      secaoEmpresa?.classList.add('d-none');
+    }
+
+    navLogout?.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('usuario');
+      alert('Você saiu da conta');
+      location.reload();
+    });
+  }
+
+
+  /* =====================================================
+     ELEMENTOS DO DOM
+  ===================================================== */
+  const fotoInput = document.getElementById('fotoInput');
+  const fileBar = document.getElementById('fileBar');
+  const preview = document.getElementById('previewFotos');
+  const btnEnviar = document.getElementById('btnEnviar');
+  const descricao = document.getElementById('descricaoResultado');
+  const btnPdfPro = document.getElementById('btnPdfPro');
+  const modeloRelatorio = document.getElementById('modeloRelatorio');
+  const enderecoImovel = document.getElementById('enderecoImovel');
+
+  let imagensSelecionadas = [];
+
+
+  /* =====================================================
+     UPLOAD DE FOTOS (COM BLOQUEIO)
+  ===================================================== */
+  fileBar?.addEventListener('click', () => {
+    if (!usuario) return exigirLogin();
+    fotoInput.click();
+  });
+
+  fotoInput?.addEventListener('change', () => {
+    Array.from(fotoInput.files).forEach(file => {
+      if (file.type.startsWith('image/')) {
+        imagensSelecionadas.push(file);
+      }
+    });
+    fotoInput.value = '';
+    atualizarBarra();
+    renderizarPreview();
+  });
+
+
+  function atualizarBarra() {
+    if (!fileBar) return;
+    const total = imagensSelecionadas.length;
+    fileBar.textContent =
+      total === 0
+        ? 'Nenhuma foto selecionada'
+        : total === 1
+          ? '1 foto selecionada'
+          : `${total} fotos selecionadas`;
+  }
+
+  function renderizarPreview() {
+    if (!preview) return;
+    preview.innerHTML = '';
+
+    imagensSelecionadas.forEach((file, index) => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const div = document.createElement('div');
+        div.className = 'preview-item';
+        div.innerHTML = `
+          <img src="${e.target.result}">
+          <div class="preview-remove">&times;</div>
+        `;
+        div.querySelector('.preview-remove').onclick = () => {
+          imagensSelecionadas.splice(index, 1);
+          atualizarBarra();
+          renderizarPreview();
+        };
+        preview.appendChild(div);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+
+  /* =====================================================
+     GERAR DESCRIÇÃO (SIMULA IA)
+  ===================================================== */
+  btnEnviar?.addEventListener('click', () => {
+    if (!usuario) return exigirLogin();
+    if (!imagensSelecionadas.length) {
+      alert('Adicione ao menos uma foto.');
+      return;
+    }
+
+    btnEnviar.disabled = true;
+    btnEnviar.innerHTML = 'Analisando...';
+
+    setTimeout(() => {
+      descricao.value =
+        'Ambiente em bom estado geral, com paredes pintadas e boa iluminação.';
+      btnEnviar.disabled = false;
+      btnEnviar.innerHTML = 'Enviar para análise';
+    }, 2000);
+  });
+
+
+  /* =====================================================
+     PDF + LIMITE FREE
+  ===================================================== */
+  btnPdfPro?.addEventListener('click', async () => {
+
+    if (!usuario) return exigirLogin();
+
+    if (planoUsuario === 'free' && totalVistorias >= LIMITE_FREE) {
+      return exigirUpgrade();
+    }
+
+    totalVistorias++;
+    localStorage.setItem('totalVistorias', totalVistorias);
+
+    alert('PDF gerado (demo)');
+  });
+
+});
+</script>
+
+
+<!-- ÂNCORA INVISÍVEL PARA LOGIN -->
+<div id="login-anchor"></div>
+
+<!-- ===================== -->
+<!-- ABA LOGIN -->
+<!-- ===================== -->
+<section
+  id="aba-login"
+  class="login-section d-none"
+>
+  <div class="login-overlay">
+    <div class="login-card">
+
+      <h2 class="mb-4 text-center">Entrar</h2>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">E-mail</label>
+        <input
+          type="email"
+          id="loginEmail"
+          class="form-control"
+          placeholder="seu@email.com"
+        >
+      </div>
+
+      <button
+        id="btnLogin"
+        class="btn btn-warning w-100 fw-bold"
+      >
+        Entrar
+      </button>
+
+    </div>
+  </div>
+</section>
+
+  </body>
+</html>
